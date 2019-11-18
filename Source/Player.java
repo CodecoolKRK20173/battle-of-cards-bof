@@ -27,9 +27,11 @@ abstract class Player {
         return this.hand.getCards().get(i);
     }
 
-    void displayDeck(){
+    String deckToString(){
+        StringBuilder cards = new StringBuilder();
         for(Card card : this.hand.getCards()){
-            System.out.println(card.toString());
+            cards.append(card.toString()).append("\n");
         }
+        return cards.toString();
     }
 }
