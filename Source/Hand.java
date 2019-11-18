@@ -9,8 +9,8 @@ class Hand implements Readable {
     private String[] stats = new String[5];
 
 
-    Hand(){
-        createHand(5);
+    Hand(int amountOfCards){
+        createHand(amountOfCards);
     }
 
     @Override
