@@ -1,4 +1,8 @@
+import java.util.List;
+
 interface Readable {
 
-    void createHand(int amountOfCards);
+    void loadCards(String filePath);
+    List<String> getAllCards();
+    int maxCards();
 }
