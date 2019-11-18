@@ -6,7 +6,20 @@ class Card {
     private int hp;
 
 
-    public Card(){
+    Card(String newName, int newAttack, int newDefence, int newInitiative, int newHp){
+        this.name = newName;
+        this.attack = newAttack;
+        this.defence = newDefence;
+        this.initiative = newInitiative;
+        this.hp = newHp;
+    }
 
+    @Override
+    public String toString(){
+        return (this.name +
+                " Att: " + this.attack +
+                " Def: " + this.defence +
+                " Ini: " + this.initiative +
+                " HP: " + this.hp);
     }
 }
