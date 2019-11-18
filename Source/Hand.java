@@ -19,11 +19,13 @@ class Hand {
         for (int i = 0; i < amountOfCards; i ++){
             tempString = read.getAllCards().get(randInt(random, 0, read.maxCards()));
             stats = tempString.split("-");
-            for (String string : stats){
-                System.out.println(string);
+            this.cards.add(new Card(stats[0],           // name
+                    Integer.parseInt(stats[1]),     // att
+                    Integer.parseInt(stats[2]),    // def
+                    Integer.parseInt(stats[3]),   // ini
+                    Integer.parseInt(stats[4])));     // hp
             }
         }
-    }
 
     private static int randInt(Random random, int low, int high) {
         return random.nextInt(high) + low;
@@ -33,12 +35,3 @@ class Hand {
         return this.cards;
     }
 }
-
-/*
-stats = strCurrentLine.split("-");
-                    this.cards.add(new Card(stats[0],
-                            Integer.parseInt(stats[1]),
-                            Integer.parseInt(stats[2]),
-                            Integer.parseInt(stats[3]),
-                            Integer.parseInt(stats[4])));
- */
