@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Hand implements Comparable<Hand>{
+class Hand {
     private List<Card> cards = new ArrayList<>();
     private String[] stats = new String[5];
     private Random random = new Random();

@@ -13,8 +13,7 @@ public class Read implements Readable{
         loadCards(filePath);
     }
 
-    @Override
-    public void loadCards(String filePath){
+    private void loadCards(String filePath){
         BufferedReader objReader = null;
         StringBuilder tempString = new StringBuilder();
         try {
