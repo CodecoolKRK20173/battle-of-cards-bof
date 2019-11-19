@@ -14,6 +14,9 @@ class Table {
 
     void playerTurn(){
         for (int i = 0; i < playerList.size(); i++){
+            System.out.println("The arena is: ");
+            System.out.println("Your deck is: ");
+            System.out.println("Provide input.");
                 int myInt = scanner.nextInt();
                 System.out.println("Player " + (i+1) + " input: " + myInt);
         }

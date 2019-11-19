@@ -32,6 +32,7 @@ class Human extends Player {
                 }
             }
         } catch (Exception e) {
+            // TODO
         }
         return 0;
     }

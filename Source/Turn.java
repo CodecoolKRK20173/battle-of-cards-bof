@@ -7,13 +7,9 @@ class Turn {
 
     Turn(){
         count++;
-        System.out.println("Round: " + count);
+        System.out.println("Round: " + count + " ended.");
+        System.out.println("Beep boop, comparing cards");
+        System.out.println("Combat log");
 
-
-        // display arena 1st
-        // display deck 2nd
-        // players choose action 3rd
-        // compare all cards in the arena with comparator
-        // display combat log at the end
     }
 }

@@ -65,13 +65,16 @@ class Game {
                     numsChosen = true;
                     Start(table);
                 }
-            } catch (Exception e){}
+            } catch (Exception e){
+                // TODO
+            }
         }
     }
 
     private void Start(Table table) {
         int myChoice;
         playing = true;
+        System.out.println("Game started.");
         while(playing){
             table.playerTurn();
             new Turn();
