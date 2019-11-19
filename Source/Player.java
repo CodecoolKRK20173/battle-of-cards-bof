@@ -4,6 +4,7 @@ abstract class Player {
     private Hand hand;
     private boolean alive;
     private int cardsOnHand;
+    private CardInPlay cardInPlay;
 
 
     Player(int amountOfCards){
@@ -24,9 +25,10 @@ abstract class Player {
     }
 
     void playCard(int cardChosen){
-        this.hand.getCards().get(cardChosen);
-        // remove from hand
-        // put into card in play
+        Card tempCard = this.hand.getCards().get(cardChosen);
+        this.hand.getCards().remove(cardChosen);
+        this.cardInPlay.setInPlay(tempCard);
+        // sort
     }
 
     String deckToString(){

@@ -22,4 +22,8 @@ class Card {
                 " Ini: " + this.initiative +
                 " HP: " + this.hp);
     }
+
+    public String getName(){
+        return this.name;
+    }
 }

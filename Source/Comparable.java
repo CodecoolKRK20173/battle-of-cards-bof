@@ -1,2 +1,2 @@
-interface Comparable {
+interface Comparable<S> {
 }

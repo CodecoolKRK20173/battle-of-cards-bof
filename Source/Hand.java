@@ -1,8 +1,6 @@
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
-class Hand {
+class Hand implements Comparable<Hand>{
     private List<Card> cards = new ArrayList<>();
     private String[] stats = new String[5];
     private Random random = new Random();
@@ -34,4 +32,5 @@ class Hand {
     List<Card> getCards(){
         return this.cards;
     }
+
 }
