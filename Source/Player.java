@@ -28,7 +28,7 @@ abstract class Player {
         Card tempCard = this.hand.getCards().get(cardChosen);
         this.hand.getCards().remove(cardChosen);
         this.cardInPlay.setInPlay(tempCard);
-        // sort
+        this.hand.getCards().sort(Card::compareName);
     }
 
     String deckToString(){
