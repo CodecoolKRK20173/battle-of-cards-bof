@@ -23,8 +23,10 @@ abstract class Player {
         this.alive = false;
     }
 
-    Card playCard(int i){
-        return this.hand.getCards().get(i);
+    void playCard(int cardChosen){
+        this.hand.getCards().get(cardChosen);
+        // remove from hand
+        // put into card in play
     }
 
     String deckToString(){

@@ -9,11 +9,12 @@ class Turn {
 
     Turn(){
         count++;
-        // compare all cards in the arena with comparator
+
 
         // display arena 1st
         // display deck 2nd
         // players choose action 3rd
+        // compare all cards in the arena with comparator
         // display combat log at the end
     }
 

@@ -20,4 +20,8 @@ class Human extends Player {
     public boolean isPassed(){
         return this.passed;
     }
+
+    void playCard(){
+
+    }
 }
