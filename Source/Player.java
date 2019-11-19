@@ -4,12 +4,15 @@ abstract class Player {
     private Hand hand;
     private boolean alive;
     private int cardsOnHand;
-    private CardInPlay cardInPlay;
+    private Card cardInPlay;
+    private int points;
 
 
     Player(int amountOfCards){
         this.hand = new Hand(amountOfCards);
         this.alive = true;
+        this.cardInPlay = null;
+        this.points = 0;
     }
 
     List<Card> getCards(){
@@ -24,11 +27,16 @@ abstract class Player {
         this.alive = false;
     }
 
-    void playCard(int cardChosen){
-        Card tempCard = this.hand.getCards().get(cardChosen);
-        this.hand.getCards().remove(cardChosen);
-        this.cardInPlay.setInPlay(tempCard);
+    void playCard(){
+        int i = 0;
+        Card tempCard = this.hand.getCards().get(i);
+        this.hand.getCards().remove(i);
+        this.cardInPlay = tempCard;
         this.hand.getCards().sort(Card::compareName);
+    }
+
+    void setCardInPlay(Card newCard){
+        this.cardInPlay = newCard;
     }
 
     String deckToString(){
@@ -37,5 +45,13 @@ abstract class Player {
             cards.append(card.toString()).append("\n");
         }
         return cards.toString();
+    }
+
+    Hand getHand(){
+        return this.hand;
+    }
+
+    Card getCardInPlay(){
+        return this.cardInPlay;
     }
 }

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 class CardInPlay {
-    private List<Card> inPlay = new ArrayList<>();
+    private Card inPlay = null;
 
 
     CardInPlay(){
@@ -10,10 +10,10 @@ class CardInPlay {
     }
 
     Card getInPlay(){
-        return this.inPlay.get(0);
+        return this.inPlay;
     }
 
     void setInPlay(Card newCard){
-        this.inPlay.set(0, newCard);
+        this.inPlay = newCard;
     }
 }

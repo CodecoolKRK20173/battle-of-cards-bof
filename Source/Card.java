@@ -18,7 +18,7 @@ class Card {
         return this.name;
     }
 
-     private int getAttack() { return this.attack; }
+     int getAttack() { return this.attack; }
 
      private int getDefence() { return this.defence; }
 

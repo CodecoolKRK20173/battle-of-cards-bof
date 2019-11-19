@@ -17,6 +17,20 @@ class Human extends Player {
         }
     }
 
+    @Override
+    void playCard(){
+        int cardIndex = 1;
+        for (Card card : getCards()){
+            System.out.println(cardIndex + " " + card.toString());
+            cardIndex++;
+        }
+        int cardIndexChoice = (scanner.nextInt() -1);
+        Card tempCard = getHand().getCards().get(cardIndexChoice);
+        getHand().getCards().remove(cardIndexChoice);
+        setCardInPlay(tempCard);
+        getHand().getCards().sort(Card::compareName);
+    }
+
     public boolean isPassed() {
         return this.passed;
     }
