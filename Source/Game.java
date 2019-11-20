@@ -80,13 +80,13 @@ class Game {
     }
 
     private void Start(Table table) {
-        int myChoice;
         playing = true;
         System.out.println("Game started.");
-        while(playing){
+        while(!table.isGameOver()){
             table.playerTurn();
             new Turn();
         }
+        table.finalScore();
     }
 }
 

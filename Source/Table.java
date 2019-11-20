@@ -19,7 +19,6 @@ class Table {
         for (i = 0; i < playerList.size(); i++){
             displayArena();
             System.out.println("Player " + (i+1) + "'s turn");
-
             playerList.get(i).playCard();
         }
         for(j = 0; j < playerList.size(); j++){
@@ -32,6 +31,25 @@ class Table {
                 System.out.println("Player " + (j+1) + " plays " + playerList.get(j).getCardInPlay().toString());
             }
         }
+        fight();
+        showScore();
+    }
+
+    boolean isGameOver() {
+        int i;
+        int numOfPlayers = playerList.size();
+        int deadPlayers = 0;
+        for (i = 0; i < playerList.size(); i++) {
+            if (!playerList.get(i).isAlive()) {
+                System.out.println("Player " + (i+1) + " is dead.");
+                deadPlayers++;
+                if(deadPlayers == numOfPlayers) {
+                    System.out.println("Everyone is dead.");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void displayArena(){
@@ -47,28 +65,63 @@ class Table {
         System.out.println("___________________________________________");
     }
 
-    void fight() {
-        Card tempCard;
+    private void showScore(){
+        int points;
         int i;
-        for (i = 0; i < playerList.size(); i++) {
-            tempCard = playerList.get(i).getCardInPlay();
-            if(tempCard != null) {
-//                Card.compareAtt(tempCard, );
-            }
-            playerList.get(i).getCardInPlay();
+        System.out.println("Score so far:");
+       for (i = 0; i < playerList.size(); i++){
+           points = playerList.get(i).getPoints();
+           System.out.println("Player " +(i+1)+ " score: " + points);
         }
     }
 
-//    Player winningHand(){
-//        Player winner;
-//        (Card)playerList.sort(Card::compareAtt);
-//        return playerList.get(playerList.size());
-//    }
-//
-//    static int compareAtt(Card card1, Card card2) {
-//        return Integer.compare(card1.getAttack(), card2.getAttack());
+    private void fight() {
+        Card tempCard;
+        int tempIndex;
+        int tempValue;
+        int i;
+        int winningIndex = 0;
+        int winningValue = 0;
+        for (i = 0; i < playerList.size(); i++) {
+            tempCard = playerList.get(i).getCardInPlay();
+            if(tempCard != null) {
+                tempIndex = i;
+                tempValue = tempCard.getAttack();
+                if(tempValue > winningValue){
+                    winningIndex = tempIndex;
+                    winningValue = tempValue;
+                }
+            }
+        }
+        playerList.get(winningIndex).addPoint();
+        System.out.println("\n" + "Player: " + (winningIndex+1) + " scores." + "\n");
+        for (i = 0; i < playerList.size(); i++){
+            playerList.get(i).nullifyCardInPlay();
+            playerList.get(i).loseCheck();
+        }
+    }
 
-    // list of players who're still playing if > !1 playing = false
-    // last player is victorious
-    // else it's a tie
+    void finalScore(){
+        int points;
+        int tempIndex;
+        int tempValue;
+        int i;
+        int winningIndex = 0;
+        int winningValue = 0;
+        int j;
+        for (i = 0; i < playerList.size(); i++) {
+                tempIndex = i;
+                tempValue = playerList.get(i).getPoints();
+                if(tempValue > winningValue){
+                    winningIndex = tempIndex;
+                    winningValue = tempValue;
+            }
+        }
+        System.out.println("\n" + "Player: " + (winningIndex+1) + " wins." + "\n");
+        System.out.println("Final Score:");
+        for (j = 0; j < playerList.size(); j++){
+            points = playerList.get(j).getPoints();
+            System.out.println("Player " +(j+1)+ " score: " + points);
+        }
+    }
 }

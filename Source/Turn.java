@@ -10,7 +10,5 @@ class Turn {
         System.out.println("-------------------------------");
         System.out.println("Round: " + count + " ended.");
         System.out.println("-------------------------------");
-
-        System.out.println("Combat log");
     }
 }

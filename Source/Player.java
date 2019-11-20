@@ -15,6 +15,7 @@ abstract class Player {
         this.points = 0;
     }
 
+
     List<Card> getCards(){
         return this.hand.getCards();
     }
@@ -23,13 +24,23 @@ abstract class Player {
         this.cardsOnHand += -1;
     }
 
-    void lose(){
-        this.alive = false;
-    }
+    private void lose(){ this.alive = false; }
+
+    void nullifyCardInPlay() { this.cardInPlay = null; }
+
+    boolean isAlive(){ return this.alive; }
 
     void addPoint(){ this.points++; }
 
     int getPoints(){ return this.points; }
+
+    void setCardsOnHand(int newCardsOnHand){
+        this.cardsOnHand = newCardsOnHand;
+    }
+
+    int getCardsOnHand(){
+        return this.cardsOnHand;
+    }
 
     void playCard(){
         int i = 0;
@@ -57,5 +68,11 @@ abstract class Player {
 
     Card getCardInPlay(){
         return this.cardInPlay;
+    }
+
+    void loseCheck(){
+        if(this.cardsOnHand == 0 && cardInPlay == null){
+            lose();
+        }
     }
 }

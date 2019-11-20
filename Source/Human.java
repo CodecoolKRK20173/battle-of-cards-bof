@@ -32,9 +32,13 @@ class Human extends Player {
             getHand().getCards().remove(cardIndexChoice);
             setCardInPlay(tempCard);
             getHand().getCards().sort(Card::compareName);
+            setCardsOnHand(getHand().getCards().size());
             cardChosen = true;
         } catch (InputMismatchException e){
             System.out.println("Try again");
+            scanner.next();
+        } catch (IndexOutOfBoundsException f){
+            System.out.println("You don't have that many cards");
             scanner.next();
         }
     }
