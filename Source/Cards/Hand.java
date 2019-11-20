@@ -6,11 +6,9 @@ class Hand {
     private Random random = new Random();
     private Read read = new Read("Resources/Monster.csv");
 
-
     Hand(int amountOfCards){
         createHand(amountOfCards, read.maxCards());
     }
-
 
     private void createHand(int amountOfCards, int maxCards) {
         String tempString;
@@ -32,5 +30,4 @@ class Hand {
     List<Card> getCards(){
         return this.cards;
     }
-
 }

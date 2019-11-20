@@ -8,7 +8,6 @@ import java.util.List;
 public class Read implements Readable{
     private List<String> allCards = new ArrayList<>();
 
-
     Read(String filePath){
         loadCards(filePath);
     }

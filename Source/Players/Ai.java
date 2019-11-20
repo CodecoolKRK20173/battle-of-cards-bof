@@ -1,6 +1,5 @@
 class Ai extends Player {
 
-
     Ai(int amountOfCards){
         super(amountOfCards);
     }

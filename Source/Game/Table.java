@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 class Table {
     private List<Player> playerList = new ArrayList<>();
-    private Scanner scanner = new Scanner(System.in);
 
     Table(int amountOfPlayers, int amountOfCards){
         for(int i = 0; i < amountOfPlayers; i++){

@@ -16,8 +16,8 @@ class Game {
             String.format(" %s", "0 and to do something else with your time.");
     private boolean numsChosen = false;
 
-
     Game() {
+        // nothing specjal
     }
 
     void Menu() {
@@ -89,6 +89,3 @@ class Game {
         table.finalScore();
     }
 }
-
-// display - hand, table, choose cards
-// menu

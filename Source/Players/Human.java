@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 class Human extends Player {
     private Scanner scanner = new Scanner(System.in);
-    private String myString;
     private boolean cardChosen = false;
 
     Human(int amountOfCards) {
