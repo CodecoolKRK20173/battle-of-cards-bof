@@ -6,6 +6,8 @@ class Hand {
     private Random random = new Random();
     private Read read = new Read("Resources/Monster.csv");
 
+    // /home/deus/Java/TW4/BOF/battle-of-cards-bof/Resources/Monster.csv
+
     Hand(int amountOfCards){
         createHand(amountOfCards, read.maxCards());
     }

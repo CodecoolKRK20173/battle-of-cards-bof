@@ -16,11 +16,18 @@ class Game {
             String.format(" %s", "0 and to do something else with your time.");
     private boolean numsChosen = false;
 
+
     Game() {
         // nothing specjal
     }
 
+    static void clearScreen() {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
+
     void Menu() {
+        menuChosen = false;
         System.out.println("Of all things in the world you chose to play this game.");
             while (!menuChosen) {
                 System.out.println(Welcome);
@@ -29,6 +36,7 @@ class Game {
     }
 
     private void menuChoices(){
+        menuChosen = false;
         try {
             menuChoice = scanner.nextInt();
             if (menuChoice == 0) {
@@ -70,6 +78,7 @@ class Game {
     }
 
     private void Settings() {
+        numsChosen = false;
         if (this.players == Players.SINGLEPLAYER) {
             System.out.println("Single");
         } else {
