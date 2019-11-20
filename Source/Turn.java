@@ -7,9 +7,10 @@ class Turn {
 
     Turn(){
         count++;
+        System.out.println("-------------------------------");
         System.out.println("Round: " + count + " ended.");
-        System.out.println("Beep boop, comparing cards");
-        System.out.println("Combat log");
+        System.out.println("-------------------------------");
 
+        System.out.println("Combat log");
     }
 }

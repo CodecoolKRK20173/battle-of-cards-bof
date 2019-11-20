@@ -1,72 +1,80 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 class Game {
     private List<Turn> turnList = new ArrayList<>();
     private Scanner scanner = new Scanner(System.in);
-    private int myInt;
+    private int menuChoice;
     private boolean menuChosen = false;
     private Players players;
     private boolean playing = false;
+    private String Welcome = String.format("    %s %s", "Select an option.", "\n") +
+            String.format(" %s %s", "1 to play with friends.", "\n") +
+            String.format(" %s %s", "2 if you don't have friends.", "\n") +
+            String.format(" %s", "0 and to do something else with your time.");
+    private boolean numsChosen = false;
 
 
     Game() {
-
     }
 
     void Menu() {
-        String Welcome = String.format("    %s %s", "Henlo", "\n") +
-                String.format(" %s %s", "Press 1 to play with frens.", "\n") +
-                String.format(" %s %s", "Press 2 if you don't have frens.", "\n") +
-                String.format(" %s", "Press 0 and say byebye.");
-        System.out.println(Welcome);
-        try {
+        System.out.println("Of all things in the world you chose to play this game.");
             while (!menuChosen) {
-//                String menuChoices = String.format(" %s%d%s", "What do you say fren: ", scanner.nextInt(), " but make the right choice.");
-//                System.out.print(menuChoices);
-                myInt = scanner.nextInt();
-                if (myInt == 0) {
-                    System.out.println("Bye");
-                    menuChosen = true;
-                } else if (myInt == 1) {
-                    System.out.println("Hotseat");
-                    this.players = Players.MULTIPLAYER;
-                    menuChosen = true;
-                    Settings();
-                } else if (myInt == 2) {
-                    System.out.println("Solo");
-                    this.players = Players.SINGLEPLAYER;
-                    menuChosen = true;
-                } else {
-                    System.out.println("Try again");
-                }
+                System.out.println(Welcome);
+                menuChoices();
+        }
+    }
+
+    private void menuChoices(){
+        try {
+            menuChoice = scanner.nextInt();
+            if (menuChoice == 0) {
+                System.out.println("Bye");
+                menuChosen = true;
+            } else if (menuChoice == 1) {
+                System.out.println("Hotseat");
+                this.players = Players.MULTIPLAYER;
+                menuChosen = true;
+                Settings();
+            } else if (menuChoice == 2) {
+                System.out.println("Solo");
+                this.players = Players.SINGLEPLAYER;
+                menuChosen = true;
+            } else {
+                System.out.println("Try again");
             }
-        } catch (Exception e) {
+        } catch (InputMismatchException inE) {
             System.out.println("Try again");
+            scanner.next();
+        }
+    }
+
+    private void settingsChoices(){
+        try {
+            System.out.println("How many players?");
+            menuChoice = scanner.nextInt();
+            System.out.println(menuChoice + " players will play.");
+            System.out.println("How many cards per player?");
+            int menuChoice2 = scanner.nextInt();
+            System.out.println(menuChoice2 + " cards per player.");
+            Table table = new Table(menuChoice, menuChoice2);
+            numsChosen = true;
+            Start(table);
+        } catch (InputMismatchException e) {
+            System.out.println("Try again");
+            scanner.next();
         }
     }
 
     private void Settings() {
-        boolean numsChosen = false;
         if (this.players == Players.SINGLEPLAYER) {
             System.out.println("Single");
         } else {
-            System.out.println("Multi");
-            try {
-                while (!numsChosen) {
-                    System.out.println("How many players?");
-                    myInt = scanner.nextInt();
-                    System.out.println(myInt + " players will play.");
-                    System.out.println("How many cards per player?");
-                    int myInt2 = scanner.nextInt();
-                    System.out.println(myInt2 + " cards per player.");
-                    Table table = new Table(myInt, myInt2);
-                    numsChosen = true;
-                    Start(table);
-                }
-            } catch (Exception e){
-                // TODO
+            while (!numsChosen) {
+                settingsChoices();
             }
         }
     }
@@ -81,7 +89,6 @@ class Game {
         }
     }
 }
-
 
 // display - hand, table, choose cards
 // menu

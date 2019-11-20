@@ -1,53 +1,41 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class Human extends Player {
     private Scanner scanner = new Scanner(System.in);
     private String myString;
-    private boolean passed;
     private boolean cardChosen = false;
 
     Human(int amountOfCards) {
         super(amountOfCards);
-    }
-
-    void passTurn() {
-        myString = scanner.next();
-        if (myString == null) {
-            this.passed = true;
-        }
+        getHand().getCards().sort(Card::compareName);
     }
 
     @Override
     void playCard(){
+        cardChosen = false;
         int cardIndex = 1;
+        System.out.println("\n" + "Choose which card to play.");
         for (Card card : getCards()){
             System.out.println(cardIndex + " " + card.toString());
             cardIndex++;
         }
-        int cardIndexChoice = (scanner.nextInt() -1);
-        Card tempCard = getHand().getCards().get(cardIndexChoice);
-        getHand().getCards().remove(cardIndexChoice);
-        setCardInPlay(tempCard);
-        getHand().getCards().sort(Card::compareName);
-    }
-
-    public boolean isPassed() {
-        return this.passed;
-    }
-
-    int chooseWhichCard() {
-        cardChosen = false;
-        try {
-            while (!cardChosen) {
-                int myInt = scanner.nextInt();
-                if(myInt <= (this.getCards().size() -1)) {
-                    cardChosen = true;
-                    return myInt;
-                }
-            }
-        } catch (Exception e) {
-            // TODO
+        while(!cardChosen) {
+            chooseWhichCard();
         }
-        return 0;
+    }
+
+    private void chooseWhichCard() {
+        try {
+            int cardIndexChoice = (scanner.nextInt() - 1);
+            Card tempCard = getHand().getCards().get(cardIndexChoice);
+            getHand().getCards().remove(cardIndexChoice);
+            setCardInPlay(tempCard);
+            getHand().getCards().sort(Card::compareName);
+            cardChosen = true;
+        } catch (InputMismatchException e){
+            System.out.println("Try again");
+            scanner.next();
+        }
     }
 }

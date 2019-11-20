@@ -14,14 +14,11 @@ class Table {
 
     void playerTurn(){
         int i;
-        int myInt;
         int j;
         int theNulls = 0;
         for (i = 0; i < playerList.size(); i++){
-            System.out.println("The arena is: ");
-
-            System.out.println("Your deck is: ");
-            System.out.println("Provide input.");
+            displayArena();
+            System.out.println("Player " + (i+1) + "'s turn");
 
             playerList.get(i).playCard();
         }
@@ -34,6 +31,31 @@ class Table {
             } else {
                 System.out.println("Player " + (j+1) + " plays " + playerList.get(j).getCardInPlay().toString());
             }
+        }
+    }
+
+    private void displayArena(){
+        int i;
+        Card cardToDisplay;
+        System.out.println("___________Cards in play___________________");
+        for (i = 0; i < playerList.size(); i++){
+            cardToDisplay  = playerList.get(i).getCardInPlay();
+            if(cardToDisplay != null){
+                System.out.println("Player " + (i+1) + "'s card " + cardToDisplay.toString());
+            }
+        }
+        System.out.println("___________________________________________");
+    }
+
+    void fight() {
+        Card tempCard;
+        int i;
+        for (i = 0; i < playerList.size(); i++) {
+            tempCard = playerList.get(i).getCardInPlay();
+            if(tempCard != null) {
+//                Card.compareAtt(tempCard, );
+            }
+            playerList.get(i).getCardInPlay();
         }
     }
 

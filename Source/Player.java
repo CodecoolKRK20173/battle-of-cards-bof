@@ -27,6 +27,10 @@ abstract class Player {
         this.alive = false;
     }
 
+    void addPoint(){ this.points++; }
+
+    int getPoints(){ return this.points; }
+
     void playCard(){
         int i = 0;
         Card tempCard = this.hand.getCards().get(i);
