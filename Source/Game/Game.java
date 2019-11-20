@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -18,16 +19,21 @@ class Game {
 
 
     Game() {
-        // nothing specjal
+        // nothing special
     }
 
-    static void clearScreen() {
+    boolean getMenuChosen(){
+        return this.menuChosen;
+    }
+
+    private static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
     void Menu() {
         menuChosen = false;
+        clearScreen();
         System.out.println("Of all things in the world you chose to play this game.");
             while (!menuChosen) {
                 System.out.println(Welcome);
@@ -96,5 +102,6 @@ class Game {
             new Turn();
         }
         table.finalScore();
+        menuChosen = false;
     }
 }

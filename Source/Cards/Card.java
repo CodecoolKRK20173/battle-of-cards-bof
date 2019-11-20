@@ -3,14 +3,18 @@ class Card {
     private int attack;
     private int defence;
     private int initiative;
+    private int maxHp;
     private int hp;
+    private boolean alive;
 
-    Card(String newName, int newAttack, int newDefence, int newInitiative, int newHp) {
+    Card(String newName, int newAttack, int newDefence, int newInitiative, int newMaxHp) {
         this.name = newName;
         this.attack = newAttack;
         this.defence = newDefence;
         this.initiative = newInitiative;
-        this.hp = newHp;
+        this.maxHp = newMaxHp;
+        this.hp = this.maxHp;
+        this.alive = true;
     }
 
     private String getName() {
@@ -18,9 +22,10 @@ class Card {
     }
 
      int getAttack() { return this.attack; }
-     private int getDefence() { return this.defence; }
-     private int getInitiative() { return this.initiative; }
-     private int getHp() { return this.hp; }
+     int getDefence() { return this.defence; }
+     int getInitiative() { return this.initiative; }
+     int getHp() { return this.hp; }
+     int getMaxHp() { return this.maxHp; }
 
     @Override
     public String toString() {
@@ -28,6 +33,7 @@ class Card {
                 " Att: " + this.attack +
                 " Def: " + this.defence +
                 " Ini: " + this.initiative +
+                " MaxHP: " + this.maxHp +
                 " HP: " + this.hp);
     }
 

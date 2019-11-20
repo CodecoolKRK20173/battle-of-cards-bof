@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.List;
 
 abstract class Player {
@@ -6,12 +7,16 @@ abstract class Player {
     private int cardsOnHand;
     private Card cardInPlay;
     private int points;
+    private ActionSlot actionSlot;
+    private FinalStats finalStats;
 
     Player(int amountOfCards){
         this.hand = new Hand(amountOfCards);
         this.alive = true;
         this.cardInPlay = null;
         this.points = 0;
+        this.actionSlot = new ActionSlot();
+        this.finalStats = null;
     }
 
     List<Card> getCards(){
@@ -20,6 +25,22 @@ abstract class Player {
 
     void loseCard(){
         this.cardsOnHand += -1;
+    }
+
+    ActionSlot getActionSlot(){
+        return this.actionSlot;
+    }
+
+    void setActionSlot(ActionSlot newActionSlot){
+        this.actionSlot = newActionSlot;
+    }
+
+    FinalStats getFinalStats(){
+        return this.finalStats;
+    }
+
+    void setFinalStats(Card card, ActionSlot actionSlot){
+        this.finalStats = new FinalStats(card, actionSlot);
     }
 
     private void lose(){ this.alive = false; }
@@ -36,12 +57,16 @@ abstract class Player {
         return this.cardsOnHand;
     }
 
-    void playCard(){
+    private void playCard(){
         int i = 0;
         Card tempCard = this.hand.getCards().get(i);
         this.hand.getCards().remove(i);
         this.cardInPlay = tempCard;
         this.hand.getCards().sort(Card::compareName);
+    }
+
+    void takeAction(){
+
     }
 
     void setCardInPlay(Card newCard){

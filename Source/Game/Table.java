@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 class Table {
     private List<Player> playerList = new ArrayList<>();
+    private Fight fight;
 
     Table(int amountOfPlayers, int amountOfCards){
         for(int i = 0; i < amountOfPlayers; i++){
@@ -14,24 +15,26 @@ class Table {
     void playerTurn(){
         int i;
         int j;
-        int theNulls = 0;
+//        int theNulls = 0;
         for (i = 0; i < playerList.size(); i++){
             displayArena();
             System.out.println("Player " + (i+1) + "'s turn");
-            playerList.get(i).playCard();
+            playerList.get(i).takeAction();
         }
-        for(j = 0; j < playerList.size(); j++){
-            if(playerList.get(j).getCardInPlay() == null){
-                System.out.println("Player " + (j+1) + " has an empty hand.");
-                theNulls++;
-            } else if(theNulls == playerList.size()){
-                System.out.println("You're all dead.");
-            } else {
-                System.out.println("Player " + (j+1) + " plays " + playerList.get(j).getCardInPlay().toString());
-            }
+        for(j = 0; j < playerList.size(); j++) {
+
+//            if(playerList.get(j).getCardInPlay() == null){
+//                System.out.println("Player " + (j+1) + " has an empty hand.");
+//                theNulls++;
+//            } else if(theNulls == playerList.size()){
+//                System.out.println("You're all dead.");
+//            } else {
+//                System.out.println("Player " + (j+1) + " plays " + playerList.get(j).getCardInPlay().toString());
+            // fight();
+            fight = new Fight(playerList);
+            fight.attack(playerList);
         }
-        fight();
-        showScore();
+            showScore();
     }
 
     boolean isGameOver() {
