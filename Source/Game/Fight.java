@@ -27,9 +27,14 @@ class Fight {
                             D = player.getFinalStats().getDefence();
                             HP = player.getFinalStats().getHp();
                             tempCard = player.getCardInPlay();
-                            System.out.print("Player " + (whoAttacks+1) + " attacks and" );
+                            int AD = (A - D);
+                            if(AD < 1){
+                                AD = 1;
+                            }
+                            System.out.print("Player " + (whoAttacks+1) + " attacks and deals " + (AD));
                             player.getFinalStats().setHp(damageCalculation(A, D, HP));
                             player.getCardInPlay().setHp(damageCalculation(A, D, HP));
+
                             System.out.println(" to Player " + (i+1));
                             // czy zdechł i nulle
                             // jak nie ma już nic w ręce to final turn i gracz zdech
@@ -70,7 +75,6 @@ class Fight {
             A = 1;
         }
         newHP = (HP - A);
-        System.out.print(" deals " + A + " damage");
         return newHP;
     }
 
