@@ -1,58 +1,53 @@
 import java.util.List;
 
 class Fight {
+private List<Player> playerList;
 
 
     Fight(List<Player> playerList) {
-
+        this.playerList = playerList;
     }
 
-    void attack(List<Player> playerList) {
-        Card tempCard;
-        int i;
-        int A;
-        int D;
-        int HP;
-        int whoAttacks;
-        Player player;
-        System.out.println("Fight Debug");
-        whoAttacks = getHighestInitiative(playerList);
-        if (playerList.get(whoAttacks).getFinalStats() != null) {
-            A = playerList.get(whoAttacks).getFinalStats().getAttack();
-            for (i = 0; i < playerList.size(); i++) {
-                player = playerList.get(i);
-                if (player != null) {
-                    if (player.isAlive() && player.getFinalStats() != null && !player.equals(playerList.get(whoAttacks))) {
-                        if (player.getFinalStats().isAlive()) {
-                            D = player.getFinalStats().getDefence();
-                            HP = player.getFinalStats().getHp();
-                            tempCard = player.getCardInPlay();
-                            int AD = (A - D);
-                            if(AD < 1){
-                                AD = 1;
-                            }
-                            System.out.print("Player " + (whoAttacks+1) + " attacks and deals " + (AD));
-                            player.getFinalStats().setHp(damageCalculation(A, D, HP));
-                            player.getCardInPlay().setHp(damageCalculation(A, D, HP));
+    void attack() {
+        Debugger.fight();
+        int attackerIndex = getHighestInitiative(playerList);
 
-                            System.out.println(" to Player " + (i+1));
-                            // czy zdechł i nulle
-                            // jak nie ma już nic w ręce to final turn i gracz zdech
-                            // wszystko to wyprintować
-                            if (defenderDied(player)) {
-                                killIt(player);
-                                System.out.println("Player " + (i + 1) + " lost his card: " + tempCard.toString());
-                                if (player.getCards().isEmpty()) {
-                                    System.out.println("Player " + (i + 1) + " lost, his final turn was " + (player.getFinalTurn()));
-                                    player.lose();
-                                }
-                            }
+        if (attackerHasFinalStats(attackerIndex)) {
+            Player attacker = playerList.get(attackerIndex);
+            int attackValue = attacker.getFinalStats().getAttack();
+            for (int i = 0; i < playerList.size(); i++) {
+                Player player = playerList.get(i);
+                if (confirmTarget(player, attackerIndex)) {
+
+                    String tempCard = player.getCardInPlay().toString();
+                    int defenceValue = player.getFinalStats().getDefence();
+                    int hitPoints = player.getFinalStats().getHp();
+                    int hpLossValue = setLossValue(attackValue, defenceValue);
+
+                    CombatLog.damageLog(attackerIndex, hpLossValue, i);
+
+                    updateHealth(player, attackValue, defenceValue, hitPoints);
+
+                    if (defenderDied(player)) {
+                        killIt(player);
+                        CombatLog.cardLost(i, tempCard);
+                        if (player.getCards().isEmpty()) {
+                            CombatLog.defeat(i, player);
+                            player.lose();
                         }
                     }
                 }
             }
-            playerList.get(whoAttacks).getFinalStats().didAttack();
+            setPlayerAttacked(attackerIndex);
         }
+    }
+
+    private void setPlayerAttacked(int attackerIndex){
+        playerList.get(attackerIndex).getFinalStats().didAttack();
+    }
+
+    private boolean attackerHasFinalStats(int attackerIndex){
+        return playerList.get(attackerIndex).getFinalStats() != null;
     }
 
     private boolean defenderDied(Player player){
@@ -64,18 +59,32 @@ class Fight {
         player.killIt();
     }
 
+    private int setLossValue(int attackValue, int defenceValue){
+        int hpLossValue = (attackValue - defenceValue);
+        if (hpLossValue < 1) {
+            return 1;
+        }
+        return hpLossValue;
+    }
+
+    private void updateHealth(Player player, int attackValue, int defenceValue, int hitPoints){
+        player.getFinalStats().setHp(damageCalculation(attackValue, defenceValue, hitPoints));
+        player.getCardInPlay().setHp(damageCalculation(attackValue, defenceValue, hitPoints));
+    }
+
     void youLose(){
 
     }
 
-    private int damageCalculation(int A, int D, int HP){
-        int newHP;
-        A = A - D;
-        if(A < 1){
-            A = 1;
+    private boolean confirmTarget(Player player, int attackerIndex){
+        if(player.isAlive() && player.getFinalStats() != null && !player.equals(playerList.get(attackerIndex))){
+            return (player.getFinalStats().isAlive());
         }
-        newHP = (HP - A);
-        return newHP;
+        return false;
+    }
+
+    private int damageCalculation(int attackValue, int defenceValue, int hitPoints){
+        return hitPoints - setLossValue(attackValue, defenceValue);
     }
 
     private int getHighestInitiative(List<Player> playerList) {
@@ -87,7 +96,7 @@ class Fight {
         int highestInitiative = 0;
         for (i = 0; i < playerList.size(); i++) {
             tempStats = playerList.get(i).getFinalStats();
-            if (tempStats != null && tempStats.isAlive() && tempStats.getAttacked()) {
+            if (tempStats != null && tempStats.isAlive() && !tempStats.getAttacked()) {
                 tempIndex = i;
                 tempValue = tempStats.getInitiative();
                 if (tempValue > highestInitiative) {

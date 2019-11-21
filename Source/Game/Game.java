@@ -11,7 +11,7 @@ class Game {
     private boolean menuChosen = false;
     private Players players;
     private boolean playing = false;
-    private String Welcome = String.format("    %s %s", "Select an option.", "\n") +
+    private String Welcome = String.format("    %s %s", "Welcome to BOF, choose an option.", "\n") +
             String.format(" %s %s", "1 to play with friends.", "\n") +
             String.format(" %s %s", "2 if you don't have friends.", "\n") +
             String.format(" %s", "0 and to do something else with your time.");
@@ -19,7 +19,7 @@ class Game {
 
 
     Game() {
-        // nothing special
+
     }
 
     boolean getMenuChosen(){

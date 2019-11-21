@@ -14,15 +14,17 @@ class Table {
     void turn(){
         int i;
         int j;
-        for (i = 0; i < playerList.size(); i++){
-            displayArena();
-            System.out.println("Player " + (i+1) + "'s turn");
-            playerList.get(i).takeAction();
+        for (i = 0; i < playerList.size(); i++) {
+            if (playerList.get(i).isAlive()) {
+                displayArena();
+                System.out.println("Player " + (i + 1) + "'s turn");
+                playerList.get(i).takeAction();
+            }
         }
         displayArena();
         for(j = 0; j < playerList.size(); j++) {
             fight = new Fight(playerList);
-            fight.attack(playerList);
+            fight.attack();
         }
     }
 
@@ -63,6 +65,13 @@ class Table {
                 if(deadPlayers == numOfPlayers) {
                     System.out.println("Everyone is dead.");
                     return true;
+                } else if(deadPlayers == (numOfPlayers-1)){
+                    for(int j = 0; j < playerList.size(); j++){
+                        if(playerList.get(j).isAlive()){
+                            System.out.println("Player " + (j+1) + " wins");
+                            return true;
+                        }
+                    }
                 }
             }
         }

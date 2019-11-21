@@ -1,5 +1,5 @@
 class Turn {
-    private static int count;
+    private static int count = 0;
 
     Turn(){
         count++;
