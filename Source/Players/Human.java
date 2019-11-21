@@ -18,8 +18,8 @@ class Human extends Player {
     @Override
     void takeAction(){
         actionTaken = false;
-        String action = String.format("%s\n", "Press 1 to skip a turn") +
-                String.format("%s\n", "Press 2 to play a card") +
+        String action = String.format("%s\n", "Press 1 to play a turn") +
+                String.format("%s\n", "Press 2 to skip a card") +
                 String.format("%s\n", "Press 3 to take special action");
         while(!actionTaken){
             System.out.println(action);
@@ -31,11 +31,11 @@ class Human extends Player {
         int actionChoice;
         try{
             actionChoice = scanner.nextInt();
-            if(actionChoice == 1 && this.getCardInPlay() != null){
+            if(actionChoice == 2 && this.getCardInPlay() != null){
                 System.out.println("Play nothing");
                 actionTaken = true;
                 this.skip();
-            } else if(actionChoice == 2){
+            } else if(actionChoice == 1){
                 System.out.println("Choose a card");
                 actionTaken = true;
                 this.playCard();
