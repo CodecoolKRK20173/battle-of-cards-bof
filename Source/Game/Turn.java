@@ -7,4 +7,8 @@ class Turn {
         System.out.println("Round: " + count + " ended.");
         System.out.println("-------------------------------");
     }
+
+    static int getCount(){
+        return count;
+    }
 }

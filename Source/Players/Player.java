@@ -9,6 +9,7 @@ abstract class Player {
     private int points;
     private ActionSlot actionSlot;
     private FinalStats finalStats;
+    private int finalTurn;
 
     Player(int amountOfCards){
         this.hand = new Hand(amountOfCards);
@@ -43,11 +44,15 @@ abstract class Player {
         this.finalStats = new FinalStats(card, actionSlot);
     }
 
-    private void lose(){ this.alive = false; }
+    void lose(){
+        this.finalTurn = Turn.getCount();
+        this.alive = false;
+    }
     void nullifyCardInPlay() { this.cardInPlay = null; }
     boolean isAlive(){ return this.alive; }
     void addPoint(){ this.points++; }
     int getPoints(){ return this.points; }
+    int getFinalTurn(){ return this.finalTurn; }
 
     void setCardsOnHand(int newCardsOnHand){
         this.cardsOnHand = newCardsOnHand;
