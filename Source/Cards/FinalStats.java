@@ -48,4 +48,6 @@ class FinalStats {
         return this.attack;
     }
 
+    void killIt() { this.alive = false; }
+
 }

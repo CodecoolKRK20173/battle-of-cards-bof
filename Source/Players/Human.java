@@ -31,10 +31,14 @@ class Human extends Player {
         int actionChoice;
         try{
             actionChoice = scanner.nextInt();
-            if(actionChoice == 1 && this.getCardInPlay() != null){
-                System.out.println("Play nothing");
-                actionTaken = true;
-                this.skip();
+            if(actionChoice == 1){
+                if(this.getCardInPlay() == null){
+                    System.out.println("You must have an active card on the table");
+                } else {
+                    System.out.println("Play nothing");
+                    actionTaken = true;
+                    this.skip();
+                }
             } else if(actionChoice == 2){
                 System.out.println("Choose a card");
                 actionTaken = true;
@@ -75,6 +79,7 @@ class Human extends Player {
             setCardsOnHand(getHand().getCards().size());
             setFinalStats(getCardInPlay(), null);
             cardChosen = true;
+            getFinalStats().resetAttack();
         } catch (InputMismatchException e){
             System.out.println("Try again");
             scanner.next();

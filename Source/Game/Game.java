@@ -54,7 +54,7 @@ class Game {
                 menuChosen = true;
                 Settings();
             } else if (menuChoice == 2) {
-                System.out.println("Solo");
+                System.out.println("I'm sorry to hear, see you around");
                 this.players = Players.SINGLEPLAYER;
                 menuChosen = true;
             } else {
@@ -98,10 +98,9 @@ class Game {
         playing = true;
         System.out.println("Game started.");
         while(!table.isGameOver()){
-            table.playerTurn();
+            table.turn();
             new Turn();
         }
-        table.finalScore();
         menuChosen = false;
     }
 }

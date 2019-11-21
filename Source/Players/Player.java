@@ -73,6 +73,8 @@ abstract class Player {
         this.cardInPlay = newCard;
     }
 
+    void killIt() { this.cardInPlay = null; }
+
     String deckToString(){
         StringBuilder cards = new StringBuilder();
         for(Card card : this.hand.getCards()){
