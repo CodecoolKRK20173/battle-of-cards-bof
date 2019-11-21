@@ -29,6 +29,8 @@ class Fight {
                     }
                 }
             }
+            assert player != null;
+            assert player.getFinalStats() != null;
             player.getFinalStats().didAttack();
         }
     }

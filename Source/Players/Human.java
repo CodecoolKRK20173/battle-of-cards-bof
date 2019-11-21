@@ -18,8 +18,8 @@ class Human extends Player {
     @Override
     void takeAction(){
         actionTaken = false;
-        String action = String.format("%s\n", "Press 1 to play a turn") +
-                String.format("%s\n", "Press 2 to skip a card") +
+        String action = String.format("%s\n", "Press 1 to play a card") +
+                String.format("%s\n", "Press 2 to skip a turn") +
                 String.format("%s\n", "Press 3 to take special action");
         while(!actionTaken){
             System.out.println(action);
