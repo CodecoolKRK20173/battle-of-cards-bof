@@ -15,7 +15,7 @@ class Fight {
         int HP;
         int whoAttacks;
         Player player;
-        System.out.println("Fight");
+        System.out.println("Fight Debug");
         whoAttacks = getHighestInitiative(playerList);
         if (playerList.get(whoAttacks).getFinalStats() != null) {
             A = playerList.get(whoAttacks).getFinalStats().getAttack();
@@ -27,13 +27,16 @@ class Fight {
                             D = player.getFinalStats().getDefence();
                             HP = player.getFinalStats().getHp();
                             tempCard = player.getCardInPlay();
+                            System.out.print("Player " + (whoAttacks+1) + " attacks and" );
                             player.getFinalStats().setHp(damageCalculation(A, D, HP));
+                            player.getCardInPlay().setHp(damageCalculation(A, D, HP));
+                            System.out.println(" to Player " + (i+1));
                             // czy zdechł i nulle
                             // jak nie ma już nic w ręce to final turn i gracz zdech
                             // wszystko to wyprintować
                             if (defenderDied(player)) {
                                 killIt(player);
-                                System.out.println("Player " + (i + 1) + " lost his card: " + player + tempCard.toString());
+                                System.out.println("Player " + (i + 1) + " lost his card: " + tempCard.toString());
                                 if (player.getCards().isEmpty()) {
                                     System.out.println("Player " + (i + 1) + " lost, his final turn was " + (player.getFinalTurn()));
                                     player.lose();
@@ -67,6 +70,7 @@ class Fight {
             A = 1;
         }
         newHP = (HP - A);
+        System.out.print(" deals " + A + " damage");
         return newHP;
     }
 

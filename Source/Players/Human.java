@@ -12,7 +12,7 @@ class Human extends Player {
     }
 
     private void skip(){
-
+        System.out.println(this.getFinalStats().toString()+" is still on the table");
     }
 
     @Override

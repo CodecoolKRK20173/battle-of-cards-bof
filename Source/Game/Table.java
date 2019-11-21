@@ -19,6 +19,7 @@ class Table {
             System.out.println("Player " + (i+1) + "'s turn");
             playerList.get(i).takeAction();
         }
+        displayArena();
         for(j = 0; j < playerList.size(); j++) {
             fight = new Fight(playerList);
             fight.attack(playerList);

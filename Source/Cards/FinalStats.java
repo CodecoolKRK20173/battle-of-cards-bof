@@ -6,9 +6,11 @@ class FinalStats {
     private int hp;
     private boolean alive;
     private boolean attacked;
+    private String name;
 
 
     FinalStats(Card cardInHand, ActionSlot actionSlot){
+        this.name = cardInHand.getName();
         this.attack = cardInHand.getAttack();
         this.defence = cardInHand.getDefence();
         this.initiative = cardInHand.getInitiative();
@@ -49,5 +51,15 @@ class FinalStats {
     }
 
     void killIt() { this.alive = false; }
+
+    @Override
+    public String toString(){
+        return (this.name +
+                " Att: " + this.attack +
+                " Def: " + this.defence +
+                " Ini: " + this.initiative +
+                " MaxHP: " + this.maxHp +
+                " HP: " + this.hp);
+    }
 
 }

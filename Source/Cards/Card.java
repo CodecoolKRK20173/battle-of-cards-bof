@@ -17,15 +17,15 @@ class Card {
         this.alive = true;
     }
 
-    private String getName() {
+     String getName() {
         return this.name;
     }
-
      int getAttack() { return this.attack; }
      int getDefence() { return this.defence; }
      int getInitiative() { return this.initiative; }
      int getHp() { return this.hp; }
      int getMaxHp() { return this.maxHp; }
+     void setHp(int newHp) { this.hp = newHp; }
 
     @Override
     public String toString() {
