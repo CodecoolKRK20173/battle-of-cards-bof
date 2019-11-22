@@ -9,7 +9,7 @@ class FinalStats {
     private String name;
 
 
-    FinalStats(Card cardInHand, ActionSlot actionSlot){
+    FinalStats(Card cardInHand, Action action){
         this.name = cardInHand.getName();
         this.attack = cardInHand.getAttack();
         this.defence = cardInHand.getDefence();

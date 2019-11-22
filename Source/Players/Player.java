@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.util.List;
 
 abstract class Player {
@@ -10,9 +9,11 @@ abstract class Player {
     private ActionSlot actionSlot;
     private FinalStats finalStats;
     private int finalTurn;
+    private Action actionInPlay;
 
     Player(int amountOfCards){
         this.hand = new Hand(amountOfCards);
+        this.actionSlot = new ActionSlot();
         this.alive = true;
         this.cardInPlay = null;
         this.points = 0;
@@ -40,8 +41,8 @@ abstract class Player {
         return this.finalStats;
     }
 
-    void setFinalStats(Card card, ActionSlot actionSlot){
-        this.finalStats = new FinalStats(card, actionSlot);
+    void setFinalStats(Card card, Action action){
+        this.finalStats = new FinalStats(card, action);
     }
 
     void lose(){
@@ -78,7 +79,12 @@ abstract class Player {
         this.cardInPlay = newCard;
     }
 
+    void setActionInPlay(Action action){
+        this.actionInPlay = action;
+    }
+
     void killIt() { this.cardInPlay = null; }
+
 
     String deckToString(){
         StringBuilder cards = new StringBuilder();

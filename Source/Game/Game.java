@@ -10,7 +10,6 @@ class Game {
     private int menuChoice;
     private boolean menuChosen = false;
     private Players players;
-    private boolean playing = false;
     private String Welcome = String.format("    %s %s", "Welcome to BOF, choose an option.", "\n") +
             String.format(" %s %s", "1 to play with friends.", "\n") +
             String.format(" %s %s", "2 if you don't have friends.", "\n") +
@@ -95,7 +94,6 @@ class Game {
     }
 
     private void Start(Table table) {
-        playing = true;
         System.out.println("Game started.");
         while(!table.isGameOver()){
             table.turn();

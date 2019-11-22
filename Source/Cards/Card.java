@@ -12,8 +12,8 @@ class Card {
         this.attack = newAttack;
         this.defence = newDefence;
         this.initiative = newInitiative;
-        this.maxHp = newMaxHp;
-        this.hp = this.maxHp;
+        this.maxHp = newMaxHp + 10;
+        this.hp = this.maxHp + 10;
         this.alive = true;
     }
 
@@ -33,7 +33,6 @@ class Card {
                 " Att: " + this.attack +
                 " Def: " + this.defence +
                 " Ini: " + this.initiative +
-                " MaxHP: " + this.maxHp +
                 " HP: " + this.hp);
     }
 

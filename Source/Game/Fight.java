@@ -9,19 +9,18 @@ private List<Player> playerList;
     }
 
     void attack() {
-        Debugger.fight();
         int attackerIndex = getHighestInitiative(playerList);
 
         if (attackerHasFinalStats(attackerIndex)) {
             Player attacker = playerList.get(attackerIndex);
-            int attackValue = attacker.getFinalStats().getAttack();
+            int attackValue = setAttack(attacker);
             for (int i = 0; i < playerList.size(); i++) {
                 Player player = playerList.get(i);
                 if (confirmTarget(player, attackerIndex)) {
 
                     String tempCard = player.getCardInPlay().toString();
-                    int defenceValue = player.getFinalStats().getDefence();
-                    int hitPoints = player.getFinalStats().getHp();
+                    int defenceValue = setDefence(player);
+                    int hitPoints = setHp(player);
                     int hpLossValue = setLossValue(attackValue, defenceValue);
 
                     CombatLog.damageLog(attackerIndex, hpLossValue, i);
@@ -40,6 +39,18 @@ private List<Player> playerList;
             }
             setPlayerAttacked(attackerIndex);
         }
+    }
+
+    private int setDefence(Player player){
+        return player.getFinalStats().getDefence();
+    }
+
+    private int setHp(Player player){
+        return player.getFinalStats().getHp();
+    }
+
+    private int setAttack(Player attacker){
+        return attacker.getFinalStats().getAttack();
     }
 
     private void setPlayerAttacked(int attackerIndex){
